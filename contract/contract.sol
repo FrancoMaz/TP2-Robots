@@ -24,6 +24,7 @@ contract class is Ownable {
     mapping (uint => address) public courseToOwner;
     mapping (string => address) public profNameToAddress;
     mapping (address => mapping (uint => Approval)) public studentAddressAndCourseIdToApproval;
+    mapping (uint => Approval[]) public courseIdToApprovals;
 
     function createCourse(string _name, string _prof, uint _credits, uint[] _correlatives) public {
         require(_name != '' && _prof != '' && _credits != ''); //TODO: Ver el tema de validacion de correlativas
@@ -52,12 +53,38 @@ contract class is Ownable {
     
     function approveStudent(address _student, uint _courseId, bool _partialApproval, uint _rate) public {
         if (_partialApproval) {
-            studentAddressAndCourseIdToApproval[_student][_courseId] = Approval(_partialApproval, 0, now);
+            //TODO: verificar como hacer para que newApproval sea modificado en todos los mappings en los que esta
+            Approval newApproval = Approval(_partialApproval, 0, now);
+            studentAddressAndCourseIdToApproval[_student][_courseId] = newApproval;
+            courseIdToApprovals[_courseId].push(newApproval);
         } else {
             require(_rate >= minRate && _rate <= maxRate);
             Approval studentApprovalForCourse = studentAddressAndCourseIdToApproval[_student][_courseId];
             studentApprovalForCourse.partialApproval = false;
             studentApprovalForCourse.rate = _rate;
+            //TODO: agregar token para creditos
         }
+        //TODO: enviar evento de aprobacion de la materia
+    }
+    
+    function verifyStudentState(address _student) public {
+        
+    }
+    
+    //TODO: preguntar el miercoles. Capaz se puede hacer en la funcion anterior
+    function verifyPartialApprovalForStudent(uint _courseId) {
+        Approval[] approvalsForCourse = courseIdToApprovals[_courseId];
+        Approval[] partialApprovals = new Approval[];
+        for (uint i = 0; i < approvalsForCourse.length; i++) {
+            if (approvalsForCourse[i].partialApproval) {
+                partialApprovals.push(approvalsForCourse[i]);
+            }
+        }
+        for (uint i = 0; i < partialApprovals.length; i++) {
+            if (now >= (partialApprovals[i].approvalDate + 548 days)) {
+                //TODO: remover curso para alumno
+            }
+        }
+    }
     
 }
