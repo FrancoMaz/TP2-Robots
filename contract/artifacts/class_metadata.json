@@ -71,6 +71,16 @@
 				"name": "courseIdToApprovals",
 				"outputs": [
 					{
+						"internalType": "uint256",
+						"name": "courseId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "student",
+						"type": "address"
+					},
+					{
 						"internalType": "bool",
 						"name": "partialApproval",
 						"type": "bool"
@@ -166,9 +176,9 @@
 						"type": "string"
 					},
 					{
-						"internalType": "string",
+						"internalType": "address",
 						"name": "_prof",
-						"type": "string"
+						"type": "address"
 					},
 					{
 						"internalType": "uint256",
@@ -201,9 +211,9 @@
 						"type": "string"
 					},
 					{
-						"internalType": "string",
+						"internalType": "address",
 						"name": "_prof",
-						"type": "string"
+						"type": "address"
 					},
 					{
 						"internalType": "uint256",
@@ -223,6 +233,54 @@
 				],
 				"name": "editCourse",
 				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_student",
+						"type": "address"
+					}
+				],
+				"name": "getApprovalsByStudent",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "courseId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "student",
+								"type": "address"
+							},
+							{
+								"internalType": "bool",
+								"name": "partialApproval",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "rate",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "approvalDate",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct class.Approval[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -301,8 +359,18 @@
 						"type": "uint256"
 					}
 				],
-				"name": "studentAddressAndCourseIdToApproval",
+				"name": "studentAddressToApprovals",
 				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "courseId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "student",
+						"type": "address"
+					},
 					{
 						"internalType": "bool",
 						"name": "partialApproval",
@@ -352,21 +420,6 @@
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_student",
-						"type": "address"
-					}
-				],
-				"name": "verifyStudentState",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -390,10 +443,10 @@
 	},
 	"sources": {
 		"contract.sol": {
-			"keccak256": "0x3947e9edd5782880f306b3178b2ab6b1011324ea23f5b35c7a9f2f7c90ded89c",
+			"keccak256": "0xf8476f96b63fab3fec56fb3df8d533a42e0c5ec6ac1a70245d31151917a431a5",
 			"urls": [
-				"bzz-raw://9da94faa221e16dfed668bf4eb403d31ea646cd28e567c186d6ad047100477f0",
-				"dweb:/ipfs/QmWJjooHXWE3vUCgNJsc2qdeqVveuA2HN6CoebxTZxBXrQ"
+				"bzz-raw://2512c126faa1f804390c89e5ab6157c222b11ff45d00265e9e2c6d38382727a7",
+				"dweb:/ipfs/QmdXh86yXo1EZKwSj3f2sKxQd2Q8CPxzQzhcoFzHjFitSU"
 			]
 		},
 		"ownable.sol": {
