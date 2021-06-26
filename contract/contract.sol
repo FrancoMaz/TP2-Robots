@@ -3,6 +3,15 @@ pragma experimental ABIEncoderV2;
 
 import "./ownable.sol";
 
+//TODO:
+// 1) El owner debe poder modificar el minRate y el maxRate
+// 2) Solo el profesor puede remover un curso de la cuenta del alumno
+// 3) Remover el curso de la cuenta del alumno si paso 1 anio y medio despues de que aprobo la cursada pero no aprobo el final
+// 4) Agregar token de creditos
+// 5) Lanzar evento cuando un alumno apruebe la cursada (parcial o total)
+// 6) Validaciones?
+
+
 contract class is Ownable {
     
     uint minRate = 4;
