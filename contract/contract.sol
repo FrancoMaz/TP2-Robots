@@ -2,6 +2,7 @@ pragma solidity >=0.5.0 <0.6.0;
 pragma experimental ABIEncoderV2;
 
 import "./ownable.sol";
+import "./credits.sol";
 
 //TODO:
 // 1) El owner debe poder modificar el minRate y el maxRate
@@ -12,7 +13,7 @@ import "./ownable.sol";
 // 6) Validaciones?
 
 
-contract class is Ownable {
+contract Class is Ownable, Credits {
     
     uint minRate = 4;
     uint maxRate = 10;
@@ -37,12 +38,13 @@ contract class is Ownable {
     Course[] public courses;
     
     mapping (uint => address) public courseToOwner;
-    mapping (string => address) public profNameToAddress;
+    mapping (uint => Course) public idToCourse;
     mapping (address => Approval[]) public studentAddressToApprovals;
     mapping (uint => Approval[]) public courseIdToApprovals;
 
     function createCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives) public {
         courses.push(Course(_id, _name, _prof, _credits, _correlatives, true));
+        idToCourse[_id] = Course(_id, _name, _prof, _credits, _correlatives, true);
         courseToOwner[_id] = msg.sender;
     }
     
@@ -75,7 +77,7 @@ contract class is Ownable {
                     courseIdToApprovals[_courseId][i].rate = _rate;
                 }
             }
-            //TODO: agregar token para creditos
+            generateToken(_student, idToCourse[_courseId].credits);
         }
         //TODO: enviar evento de aprobacion de la materia
     }
