@@ -31,8 +31,8 @@ contract Ownable {
     _owner = address(0);
   }
 
-  function transferOwnership(address newOwner) public onlyOwner {
-    _transferOwnership(newOwner);
+  function transferOwnership(address _newOwner) public onlyOwner {
+    _transferOwnership(_newOwner);
   }
 
   function _transferOwnership(address newOwner) internal {

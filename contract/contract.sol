@@ -5,10 +5,7 @@ import "./ownable.sol";
 import "./credits.sol";
 
 //TODO:
-// 1) El owner debe poder modificar el minRate y el maxRate
-// 2) Solo el profesor puede remover un curso de la cuenta del alumno
-// 3) Remover el curso de la cuenta del alumno si paso 1 anio y medio despues de que aprobo la cursada pero no aprobo el final
-// 4) Validaciones al crear y editar un curso
+// 1) Validaciones al crear y editar un curso
 
 contract Class is Ownable, Credits {
     
@@ -36,12 +33,15 @@ contract Class is Ownable, Credits {
     
     mapping (uint => address) public courseToOwner;
     mapping (uint => Course) public idToCourse;
-    mapping (address => Approval[]) public studentAddressToApprovals;
-    mapping (uint => Approval[]) public courseIdToApprovals;
+    mapping (address => mapping (uint => Approval)) public studentAddressToApprovals;
+    mapping (uint => mapping (address => Approval)) public courseIdToApprovals;
+    
+    Course[] public courses;
 
     function createCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives) public {
         idToCourse[_id] = Course(_id, _name, _prof, _credits, _correlatives, true);
         courseToOwner[_id] = msg.sender;
+        courses.push(Course(_id, _name, _prof, _credits, _correlatives, true));
     }
     
     function editCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) public {
@@ -53,11 +53,17 @@ contract Class is Ownable, Credits {
         courseToChange.active = _active;
     }
     
+    function transferOwnership(address _newOwner, uint _courseId) public onlyOwner {
+        require(courseToOwner[_courseId] == msg.sender);
+        courseToOwner[_courseId] = _newOwner;
+    }
+    
     function approveStudentPartial(address _student, uint _courseId) public {
         require(msg.sender == idToCourse[_courseId].prof);
         require(correlativesApproved(_student, _courseId));
-        studentAddressToApprovals[_student].push(Approval(_courseId, _student, true, 0, now));
-        courseIdToApprovals[_courseId].push(Approval(_courseId, _student, true, 0, now));
+        Approval memory approval = Approval(_courseId, _student, true, 0, now);
+        studentAddressToApprovals[_student][_courseId] = approval;
+        courseIdToApprovals[_courseId][_student] = approval;
         emit StudentApproved(_student, _courseId, true);
     }
     
@@ -65,18 +71,9 @@ contract Class is Ownable, Credits {
         require(msg.sender == idToCourse[_courseId].prof);
         require(correlativesApproved(_student, _courseId));
         require(_rate >= minRate && _rate <= maxRate);
-        for (uint i = 0; i < studentAddressToApprovals[_student].length; i++) {
-            if (studentAddressToApprovals[_student][i].courseId == _courseId) {
-                studentAddressToApprovals[_student][i].partialApproval = false;
-                studentAddressToApprovals[_student][i].rate = _rate;
-            }
-        }
-        for (uint i = 0; i < courseIdToApprovals[_courseId].length; i++) {
-            if (courseIdToApprovals[_courseId][i].student == _student) {
-                courseIdToApprovals[_courseId][i].partialApproval = false;
-                courseIdToApprovals[_courseId][i].rate = _rate;
-            }
-        }
+        Approval memory approval = Approval(_courseId, _student, false, _rate, now);
+        studentAddressToApprovals[_student][_courseId] = approval;
+        courseIdToApprovals[_courseId][_student] = approval;
         generateToken(_student, idToCourse[_courseId].credits);
         emit StudentApproved(_student, _courseId, false);
     }
@@ -84,10 +81,8 @@ contract Class is Ownable, Credits {
     function correlativesApproved(address _student, uint _courseId) private view returns (bool) {
         uint approved = 0;
         for (uint i = 0; i < idToCourse[_courseId].correlatives.length; i++) {
-            for (uint j = 0; j < studentAddressToApprovals[_student].length; j++) {
-                if (studentAddressToApprovals[_student][j].courseId == idToCourse[_courseId].correlatives[i]) {
-                    approved++;
-                }
+            if (!(studentAddressToApprovals[_student][idToCourse[_courseId].correlatives[i]].rate >= minRate)) {
+                approved++;
             }
         }
         if (approved == idToCourse[_courseId].correlatives.length) {
@@ -98,17 +93,33 @@ contract Class is Ownable, Credits {
     
     //Funcion para verificar el estado del alumno en todas las materias
     function getApprovalsByStudent(address _student) public view returns (Approval[] memory) {
-        return studentAddressToApprovals[_student];
+        Approval[] memory result = new Approval[](courses.length);
+        uint counter = 0;
+        for (uint i = 0; i < courses.length; i++) {
+            uint courseId = courses[i].id;
+          if (studentAddressToApprovals[_student][courseId].student == _student) {
+            result[counter] = studentAddressToApprovals[_student][courseId];
+            counter++;
+          }
+        }
+        return result;
     }
     
-    function verifyPartialApprovalForStudent(uint _courseId) public {
-        Approval[] memory approvalsForCourse = courseIdToApprovals[_courseId];
-        for (uint i = 0; i < approvalsForCourse.length; i++) {
-            if (approvalsForCourse[i].partialApproval && now >= (approvalsForCourse[i].approvalDate + 548 days)) {
-                 //TODO: remover curso para alumno
-            }
+    function verifyPartialApprovalForStudent(uint _courseId, address _student) public {
+        require(msg.sender == idToCourse[_courseId].prof);
+        if (courseIdToApprovals[_courseId][_student].partialApproval && now >= (courseIdToApprovals[_courseId][_student].approvalDate + 548 days)) {
+            delete studentAddressToApprovals[_student][_courseId];
+            delete courseIdToApprovals[_courseId][_student];
         }
         
+    }
+    
+    function editMinRate(uint _minRate) public {
+        minRate = _minRate;
+    }
+    
+    function editMaxRate(uint _maxRate) public {
+        maxRate = _maxRate;
     }
     
 }
