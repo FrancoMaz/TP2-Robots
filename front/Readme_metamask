@@ -1,0 +1,9 @@
+Tuto levantar metamask local
+
+1) Instalar metamask
+2) Instalar geth: https://geth.ethereum.org/docs/install-and-build/installing-geth
+3) Ejecutar geth --rpc --rpccorsdomain="chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn" --> mas info en https://metamask.zendesk.com/hc/en-us/articles/360015290012-Using-a-Local-Node
+4) En la app de metamask seleccionar localhost --> mas info  en https://metamask.zendesk.com/hc/en-us/articles/360015290012-Using-a-Local-Node
+5) Ejecutar npm install http-server -g
+6) Ir hasta la carpeta del tp y ejecutar http-server
+7) Abrir localhost:8080 en el browser

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>SIU Backoffice</title>
+    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script language="javascript" type="text/javascript" src="cryptozombies_abi.js"></script>
+  </head>
+  <body>
+    <script>
+      var cryptoZombies;
+      // 1. Declara `userAccount` aquí
+      function startApp() {
+        var cryptoZombiesAddress = "YOUR_CONTRACT_ADDRESS";
+        cryptoZombies = new web3js.eth.Contract(cryptoZombiesABI, cryptoZombiesAddress);
+        // 2. Crea el código `setInterval` justo aquí
+      }
+      function getZombieDetails(id) {
+        return cryptoZombies.methods.zombies(id).call()
+      }
+      function zombieToOwner(id) {
+        return cryptoZombies.methods.zombieToOwner(id).call()
+      }
+      function getZombiesByOwner(owner) {
+        return cryptoZombies.methods.getZombiesByOwner(owner).call()
+      }
+
+      window.addEventListener('load', async() => {
+        // Aquí se comprueba si Web3.js ha sido inyecto por el navegador (Mist/MetaMask)
+       console.log("verificando...")
+        if (window.ethereum) {
+          // Usar el proveedor Mist/MetaMask
+          console.log("creando web3")
+          web3js = new Web3(ethereum);
+        } else {
+          alert('Para continuar por favor instale el plugin de Metamask ')
+        }
+        // Ahora ya puedes acceder libremente a tu DApp y usar Web3:
+        startApp()
+      });
+    </script>
+  </body>
+</html>
