@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import "./register.scss";
 import TextField from '@material-ui/core/TextField';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import tokenChecker from '../../utils/TokenChecker';
-import validate from '../../utils/RegisterValidator';
 import { withSnackbar } from 'notistack';
 
  class Register extends Component {
@@ -16,7 +13,6 @@ import { withSnackbar } from 'notistack';
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleApiResponse = this.handleApiResponse.bind(this);
     this.handleAlertStatus = this.handleAlertStatus.bind(this);
   }
 
@@ -29,17 +25,7 @@ import { withSnackbar } from 'notistack';
     this.setState({[input.name]: input.value});
   }
 
-  handleApiResponse(response) {
-    if (response.error) {
-      this.handleAlertStatus(response.error, 'error' )
-    } 
-    else {
-        this.handleAlertStatus(response.msg, 'success' )
-        this.props.history.push("/home");
-    }
-  }
-
-   handleAlertStatus = (message, status) => {
+  handleAlertStatus = (message, status) => {
     this.props.enqueueSnackbar(message, {variant: status})
   }
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "./home.scss";
-import {App} from "../app"
 
 export class Home extends Component {
 
@@ -10,6 +9,7 @@ export class Home extends Component {
     }
 
     handleCreateAdmin(){
+        console.log(window.contract)
         this.props.history.push("/register");
     }
 
