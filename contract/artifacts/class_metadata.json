@@ -25,6 +25,51 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "student",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "courseId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "partialApproval",
+						"type": "bool"
+					}
+				],
+				"name": "StudentApproved",
+				"type": "event"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_student",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_courseId",
+						"type": "uint256"
+					}
+				],
+				"name": "approveStudentPartial",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
@@ -38,20 +83,36 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "bool",
-						"name": "_partialApproval",
-						"type": "bool"
-					},
-					{
 						"internalType": "uint256",
 						"name": "_rate",
 						"type": "uint256"
 					}
 				],
-				"name": "approveStudent",
+				"name": "approveStudentTotal",
 				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_student",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "balance",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -63,9 +124,9 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256",
+						"internalType": "address",
 						"name": "",
-						"type": "uint256"
+						"type": "address"
 					}
 				],
 				"name": "courseIdToApprovals",
@@ -189,9 +250,54 @@
 						"internalType": "uint256[]",
 						"name": "_correlatives",
 						"type": "uint256[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "_active",
+						"type": "bool"
 					}
 				],
 				"name": "createCourse",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "_prof",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_credits",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_correlatives",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "_active",
+						"type": "bool"
+					}
+				],
+				"name": "createOrEditCourse",
 				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
@@ -241,6 +347,56 @@
 				"constant": false,
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_maxRate",
+						"type": "uint256"
+					}
+				],
+				"name": "editMaxRate",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_minRate",
+						"type": "uint256"
+					}
+				],
+				"name": "editMinRate",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_student",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_numberOfCredits",
+						"type": "uint256"
+					}
+				],
+				"name": "generateToken",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "_student",
 						"type": "address"
@@ -276,13 +432,54 @@
 								"type": "uint256"
 							}
 						],
-						"internalType": "struct class.Approval[]",
+						"internalType": "struct Class.Approval[]",
 						"name": "",
 						"type": "tuple[]"
 					}
 				],
 				"payable": false,
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "idToCourse",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "prof",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "credits",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -303,12 +500,12 @@
 			{
 				"constant": true,
 				"inputs": [],
-				"name": "owner",
+				"name": "name",
 				"outputs": [
 					{
-						"internalType": "address",
+						"internalType": "string",
 						"name": "",
-						"type": "address"
+						"type": "string"
 					}
 				],
 				"payable": false,
@@ -317,14 +514,8 @@
 			},
 			{
 				"constant": true,
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"name": "profNameToAddress",
+				"inputs": [],
+				"name": "owner",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -392,11 +583,46 @@
 				"type": "function"
 			},
 			{
+				"constant": true,
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "newOwner",
+						"name": "_newOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_courseId",
+						"type": "uint256"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_newOwner",
 						"type": "address"
 					}
 				],
@@ -413,6 +639,11 @@
 						"internalType": "uint256",
 						"name": "_courseId",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_student",
+						"type": "address"
 					}
 				],
 				"name": "verifyPartialApprovalForStudent",
@@ -431,7 +662,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contract.sol": "class"
+			"contract.sol": "Class"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -443,17 +674,24 @@
 	},
 	"sources": {
 		"contract.sol": {
-			"keccak256": "0xf8476f96b63fab3fec56fb3df8d533a42e0c5ec6ac1a70245d31151917a431a5",
+			"keccak256": "0x368b7c70006041e5cbc337ee41c290c482cfe7eccc429bf2bc559501d71a6789",
 			"urls": [
-				"bzz-raw://2512c126faa1f804390c89e5ab6157c222b11ff45d00265e9e2c6d38382727a7",
-				"dweb:/ipfs/QmdXh86yXo1EZKwSj3f2sKxQd2Q8CPxzQzhcoFzHjFitSU"
+				"bzz-raw://9b18d531982bd02d7f7d8816f8f2efe56df178fa8b774866fe546d503ba0cbcd",
+				"dweb:/ipfs/QmXNsEVM5mAjSRVvWUavRC4FosQJznA44HGQttL9GcxAff"
+			]
+		},
+		"credits.sol": {
+			"keccak256": "0x8ca08d075e1c19519e933bba1942aabd86883affc057b502b35e2272d9a23a76",
+			"urls": [
+				"bzz-raw://6d8e06a1e8eb310157e4bdf852a4bd73606079c7178888538e0ba6aababb56f9",
+				"dweb:/ipfs/QmP84W6UeWzT8JmC9aqXrsVBMDnTshZ4m6ZifHsFHqaKPN"
 			]
 		},
 		"ownable.sol": {
-			"keccak256": "0xe1c54c1dd4d92aaab5edc494e1700f1e6bc1ee53fad1b7f17f2b0409b9d93c2e",
+			"keccak256": "0x1163fb128ab5695a0e94fa58f49120cb7599f14267ac4fba4356c2439c994413",
 			"urls": [
-				"bzz-raw://2b567609922fbc848f8aa147f321bf193e49d4e9e8b7c532ae3687b7e576c99c",
-				"dweb:/ipfs/QmXJ3JEZC3axBeKtXq7ZXspuYtDTCLtYBMZUiJrqEbmcgD"
+				"bzz-raw://de08f9e47d18cdc6473a5ab400424bc8699c60e6a168c66dfaddcabd0e955bf7",
+				"dweb:/ipfs/QmX17qF6JDxHoYBM6pK2sYnhWsaGsUJ6L8ANBhjhmc7X59"
 			]
 		}
 	},

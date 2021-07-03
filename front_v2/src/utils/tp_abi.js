@@ -244,9 +244,54 @@ var tpAbi = [
                 "internalType": "uint256[]",
                 "name": "_correlatives",
                 "type": "uint256[]"
+            },
+            {
+                "internalType": "bool",
+                "name": "_active",
+                "type": "bool"
             }
         ],
         "name": "createCourse",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "string",
+                "name": "_name",
+                "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "_prof",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_credits",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "_correlatives",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "bool",
+                "name": "_active",
+                "type": "bool"
+            }
+        ],
+        "name": "createOrEditCourse",
         "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",

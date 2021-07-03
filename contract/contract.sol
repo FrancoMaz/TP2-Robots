@@ -48,7 +48,7 @@ contract Class is Ownable, Credits {
     }
 
     function createOrEditCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) public {
-        if (existsCourse(_id)) {
+        if (_existsCourse(_id)) {
             editCourse(_id, _name, _prof, _credits, _correlatives, _active);
         } else {
             createCourse(_id, _name, _prof, _credits, _correlatives, _active);
