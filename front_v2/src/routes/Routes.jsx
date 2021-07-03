@@ -5,14 +5,15 @@ import Login from "../controllers/login/Login";
 import Register from "../controllers/register/Register";
 import {PrivateRoute} from "./PrivateRoute";
 import tokenChecker from '../utils/TokenChecker';
+import loadTp from '../utils/AppHelper';
 
 class Routes extends Component {
     render() {
         return (
             <Router key="router">
-                <Route exact path={"/"} render={props => tokenChecker() ?
+                <Route exact path={"/"} render={props => loadTp ?
                     <Redirect to={{pathname: "/home"}}/> :
-                    <Login {...props}/>
+                   ''
                 }/>
                 <PrivateRoute exact path={"/home"} component={Home}/>
                 <PrivateRoute exact path={"/register"} component={Register}/>
