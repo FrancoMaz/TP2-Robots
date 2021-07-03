@@ -22,7 +22,8 @@ class CreateCourse extends Component {
   }
 
   handleSubmit() {
-      createOrEditCourse(this.state.id, this.state.name, this.state.prof, this.state.credits, this.state.correlatives.split(','), this.state.active);
+      let correlatives = this.state.correlatives || '';
+      createOrEditCourse(this.state.id, this.state.name, this.state.prof, this.state.credits, correlatives.split(','), this.state.active);
   }
 
   handleReturnToHome() {
