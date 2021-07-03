@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import {Home} from "../controllers/home/Home";
-import Login from "../controllers/login/Login";
-import Register from "../controllers/register/Register";
-import {PrivateRoute} from "./PrivateRoute";
-import tokenChecker from '../utils/TokenChecker';
 import loadTp from '../utils/AppHelper';
+import CreateCourse from "../controllers/create-course/CreateCourse";
+import CourseList from "../controllers/course-list/CourseList";
+import ApproveStudent from "../controllers/approve-student/ApproveStudent";
+import VerifyStudentState from "../controllers/verify-student-state/VerifyStudentState";
 
 class Routes extends Component {
     render() {
@@ -15,8 +15,11 @@ class Routes extends Component {
                     <Redirect to={{pathname: "/home"}}/> :
                    ''
                 }/>
-                <PrivateRoute exact path={"/home"} component={Home}/>
-                <PrivateRoute exact path={"/register"} component={Register}/>
+                <Route exact path={"/home"} component={Home}/>
+                <Route exact path={"/list-courses"} component={CourseList}/>
+                <Route exact path={"/create-course"} component={CreateCourse}/>
+                <Route exact path={"/approve-student"} component={ApproveStudent}/>
+                <Route exact path={"/verify-student-state"} component={VerifyStudentState}/>
             </Router>
         )
     }
