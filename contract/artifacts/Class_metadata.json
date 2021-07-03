@@ -65,8 +65,8 @@
 				],
 				"name": "approveStudentPartial",
 				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
+				"payable": true,
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -90,8 +90,8 @@
 				],
 				"name": "approveStudentTotal",
 				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
+				"payable": true,
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -250,41 +250,6 @@
 						"internalType": "uint256[]",
 						"name": "_correlatives",
 						"type": "uint256[]"
-					}
-				],
-				"name": "createCourse",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
-					},
-					{
-						"internalType": "address",
-						"name": "_prof",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_credits",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "_correlatives",
-						"type": "uint256[]"
 					},
 					{
 						"internalType": "bool",
@@ -292,10 +257,10 @@
 						"type": "bool"
 					}
 				],
-				"name": "editCourse",
+				"name": "createOrEditCourse",
 				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
+				"payable": true,
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -629,10 +594,10 @@
 	},
 	"sources": {
 		"contract.sol": {
-			"keccak256": "0x976d4718f13df4082c8097f3d3ab73dbfd486bf2a58895c1af164e6dc72f1cd8",
+			"keccak256": "0xa1031f3bd7dde781e6a6162efecc27de73b40425d4cad8f3e4ace591665919d9",
 			"urls": [
-				"bzz-raw://8515e8acba798e4d9520ffa4c5098c476150f32987e8e6c750ce7b308d894897",
-				"dweb:/ipfs/QmNTeK1t2AAWRn7RvxZQfAb21b3vy1WvmM7AwZxrPQfnmR"
+				"bzz-raw://ce722248f99a6f1c765d309ad3de7da0a325f6c96abe974d7dc2806be111a458",
+				"dweb:/ipfs/QmdUory7UFd7aRnsfDupiUyEYB6Br98x78BFFAeYSar28z"
 			]
 		},
 		"credits.sol": {

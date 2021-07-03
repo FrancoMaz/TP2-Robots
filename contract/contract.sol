@@ -47,7 +47,7 @@ contract Class is Ownable, Credits {
         return false;
     }
 
-    function createOrEditCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) public {
+    function createOrEditCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) public payable {
         if (_existsCourse(_id)) {
             editCourse(_id, _name, _prof, _credits, _correlatives, _active);
         } else {
@@ -55,13 +55,13 @@ contract Class is Ownable, Credits {
         }
     }
     
-    function createCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) public {
+    function createCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) private {
         idToCourse[_id] = Course(_id, _name, _prof, _credits, _correlatives, _active);
         courseToOwner[_id] = msg.sender;
         courses.push(Course(_id, _name, _prof, _credits, _correlatives, _active));
     }
     
-    function editCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) public {
+    function editCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) private {
         Course storage courseToChange = idToCourse[_id];
         courseToChange.name = _name;
         courseToChange.prof = _prof;
@@ -75,7 +75,7 @@ contract Class is Ownable, Credits {
         courseToOwner[_courseId] = _newOwner;
     }
     
-    function approveStudentPartial(address _student, uint _courseId) public {
+    function approveStudentPartial(address _student, uint _courseId) public payable {
         require(msg.sender == idToCourse[_courseId].prof);
         require(correlativesApproved(_student, _courseId));
         Approval memory approval = Approval(_courseId, _student, true, 0, now);
@@ -84,7 +84,7 @@ contract Class is Ownable, Credits {
         emit StudentApproved(_student, _courseId, true);
     }
     
-    function approveStudentTotal(address _student, uint _courseId, uint _rate) public {
+    function approveStudentTotal(address _student, uint _courseId, uint _rate) public payable {
         require(msg.sender == idToCourse[_courseId].prof);
         require(correlativesApproved(_student, _courseId));
         require(_rate >= minRate && _rate <= maxRate);
