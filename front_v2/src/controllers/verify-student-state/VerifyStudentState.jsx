@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {checkStudentState} from "../../ContractHelper";
+import {checkStudentState} from "../../utils/ContractHelper";
 import TextField from '@material-ui/core/TextField';
 
 class VerifyStudentState extends Component {

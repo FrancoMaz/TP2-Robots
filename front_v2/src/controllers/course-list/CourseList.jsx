@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getCoursesList} from "../../ContractHelper";
+import {getCoursesList} from "../../utils/ContractHelper";
 
 class CourseList extends Component {
 

@@ -37,11 +37,28 @@ contract Class is Ownable, Credits {
     mapping (uint => mapping (address => Approval)) public courseIdToApprovals;
     
     Course[] public courses;
+    
+    function _existsCourse(uint _id) private returns (bool) {
+        for (uint i = 0; i < courses.length; i++) {
+            if (courses[i].id == _id) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    function createCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives) public {
-        idToCourse[_id] = Course(_id, _name, _prof, _credits, _correlatives, true);
+    function createOrEditCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) public {
+        if (existsCourse(_id)) {
+            editCourse(_id, _name, _prof, _credits, _correlatives, _active);
+        } else {
+            createCourse(_id, _name, _prof, _credits, _correlatives, _active);
+        }
+    }
+    
+    function createCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) public {
+        idToCourse[_id] = Course(_id, _name, _prof, _credits, _correlatives, _active);
         courseToOwner[_id] = msg.sender;
-        courses.push(Course(_id, _name, _prof, _credits, _correlatives, true));
+        courses.push(Course(_id, _name, _prof, _credits, _correlatives, _active));
     }
     
     function editCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) public {
@@ -91,7 +108,6 @@ contract Class is Ownable, Credits {
         return false;
     }
     
-    //Funcion para verificar el estado del alumno en todas las materias
     function getApprovalsByStudent(address _student) public view returns (Approval[] memory) {
         Approval[] memory result = new Approval[](courses.length);
         uint counter = 0;

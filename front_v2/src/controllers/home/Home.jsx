@@ -23,7 +23,7 @@ export class Home extends Component {
         this.props.history.push("/approve-student");
     }
 
-    handleVerifyStudentState(){
+    handleVerifyStudentState() {
         this.props.history.push("/verify-student-state");
     }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./create-course.scss";
 import TextField from '@material-ui/core/TextField';
-import {createOrEditCourse} from "../../ContractHelper"
+import {createOrEditCourse} from "../../utils/ContractHelper";
 
 class CreateCourse extends Component {
 

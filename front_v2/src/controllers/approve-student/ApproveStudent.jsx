@@ -3,7 +3,7 @@ import "./approve-student.scss";
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import {approveStudent} from "../../ContractHelper";
+import {approveStudent} from "../../utils/ContractHelper";
 
 class ApproveStudent extends Component {
 
