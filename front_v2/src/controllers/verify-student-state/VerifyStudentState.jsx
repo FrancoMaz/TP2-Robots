@@ -37,13 +37,13 @@ class VerifyStudentState extends Component {
                     <button className="button" onClick={this.handleSubmit}>Verificar estado del alumno</button>
                 </div>
                 <div className="content">
-                    {this.state.approvals}.map((approval) =>
+                    {this.state.approvals.map(approval =>
                     <div className="approval">
                         <div className="approval-field">Curso: {approval.courseId}</div>
                         <div className="approval-field">Estado: {approval.partialApproval ? "Solo cursada" : "Aprobado"}</div>
                         <div className="course-field">Nota: {approval.rate}</div>
                         <div className="course-field">Fecha de aprobación: {approval.approvalDate}</div>
-                    </div>
+                    </div>)}
                 </div>
                 <button name="return-to-home" className="button-home" onClick={this.handleReturnToHome}>Volver a la página principal</button>
             </div>
