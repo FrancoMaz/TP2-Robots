@@ -3,9 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <title>SIU Backoffice</title>
-    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script language="javascript" type="text/javascript" src="tp_abi.js"></script>
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -33,70 +30,6 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-
-    <script>
-      var cryptoTp;
-      var userAccount;
-
-     function startApp(){
-        var cryptoTpAddress = "0xa32c98518E31Da77FbFd5a3fA1A380Dd6d1aA16d";
-        cryptoTp = new web3js.eth.Contract(tpABI, cryptoTpAddress);
-        
-        const ethereumButton = document.querySelector('.enableEthereumButton');
-        const showAccount = document.querySelector('.showAccount');
-
-        ethereumButton.addEventListener('click', () => {
-          getAccount();
-        });
-
-        async function getAccount() {
-          const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-          const account = accounts[0];
-          showAccount.innerHTML = account;
-        }
-        
-        /*var accountInterval = setInterval( async function() {
-          // Comprobar si la cuenta ha sido cambiada
-         
-          const accounts = await ethereum.request({ method: 'eth_accounts' });
-          console.log('addr: ', accounts[0]);
-          if (accounts[0] !== userAccount) {
-            userAccount = accounts[0];
-            // Llamar la función que va a updatear la UI with de la nueva cuenta
-            console.log('addr: ', userAccount);
-          }
-        }, 100);*/
-        // 2. Crea el código `setInterval` justo aquí
-      }
-      function getCoursesList(id) {
-        return cryptoTp.methods.courses(id).call()
-      }
-
-      function createCourse(id, name, prof, credits) {
-        return cryptoTp.methods.createCourse(id, name, prof, credits, []).send()
-      }
-
-      ethereum.on('accountsChanged', function (accounts) {
-        // Time to reload your interface with accounts[0]!
-      });
-
-      window.addEventListener('load', async() => {
-        // Aquí se comprueba si Web3.js ha sido inyecto por el navegador (Mist/MetaMask)
-       console.log("verificando...")
-        if (window.ethereum) {
-          // Usar el proveedor Mist/MetaMask
-          console.log("creando web3")
-          web3js = new Web3(ethereum);
-        } else {
-          alert('Para continuar por favor instale el plugin de Metamask ')
-        }
-        // Ahora ya puedes acceder libremente a tu DApp y usar Web3:
-        startApp()
-      });
-    </script>
-
-    <button class="enableEthereumButton">Enable Ethereum</button>
-    <h2>Account: <span class="showAccount"></span></h2>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
