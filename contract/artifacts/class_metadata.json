@@ -53,6 +53,21 @@
 				"constant": false,
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "addId",
+				"outputs": [],
+				"payable": true,
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "_student",
 						"type": "address"
@@ -65,8 +80,8 @@
 				],
 				"name": "approveStudentPartial",
 				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
+				"payable": true,
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -90,8 +105,8 @@
 				],
 				"name": "approveStudentTotal",
 				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
+				"payable": true,
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -154,6 +169,27 @@
 					{
 						"internalType": "uint256",
 						"name": "approvalDate",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "courseTests",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
 						"type": "uint256"
 					}
 				],
@@ -257,90 +293,10 @@
 						"type": "bool"
 					}
 				],
-				"name": "createCourse",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
-					},
-					{
-						"internalType": "address",
-						"name": "_prof",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_credits",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "_correlatives",
-						"type": "uint256[]"
-					},
-					{
-						"internalType": "bool",
-						"name": "_active",
-						"type": "bool"
-					}
-				],
 				"name": "createOrEditCourse",
 				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
-					},
-					{
-						"internalType": "address",
-						"name": "_prof",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_credits",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "_correlatives",
-						"type": "uint256[]"
-					},
-					{
-						"internalType": "bool",
-						"name": "_active",
-						"type": "bool"
-					}
-				],
-				"name": "editCourse",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
+				"payable": true,
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -439,6 +395,27 @@
 				],
 				"payable": false,
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "getCourseId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -674,10 +651,10 @@
 	},
 	"sources": {
 		"contract.sol": {
-			"keccak256": "0x368b7c70006041e5cbc337ee41c290c482cfe7eccc429bf2bc559501d71a6789",
+			"keccak256": "0xfdb8a9b3136cda430e8f3ba99e3a884da5ebb436b6d5f3523c72ca40ffbd76c6",
 			"urls": [
-				"bzz-raw://9b18d531982bd02d7f7d8816f8f2efe56df178fa8b774866fe546d503ba0cbcd",
-				"dweb:/ipfs/QmXNsEVM5mAjSRVvWUavRC4FosQJznA44HGQttL9GcxAff"
+				"bzz-raw://91c74c39cbb140bae25be386887ac1a3858e93afb699d2a1052e092b9a7043b0",
+				"dweb:/ipfs/QmaBSFu4RE7j8QozuKgv39UMspJBwkeTxQTa8goWT4U59P"
 			]
 		},
 		"credits.sol": {

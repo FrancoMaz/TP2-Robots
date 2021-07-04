@@ -22,8 +22,9 @@ class CreateCourse extends Component {
   }
 
   handleSubmit() {
-      let correlatives = this.state.correlatives || '';
-      createOrEditCourse({id: this.state.id, name: this.state.name, prof: this.state.prof, credits: this.state.credits, correlatives: correlatives.split(','), active: this.state.active});
+      createOrEditCourse({
+        id: this.state.id
+      }).then(r => console.log(r));
   }
 
   handleReturnToHome() {

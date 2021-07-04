@@ -7,9 +7,17 @@ class CourseList extends Component {
         super(props)
         this.handleReturnToHome = this.handleReturnToHome.bind(this)
         this.state = {
-            courses: getCoursesList()
+            course: null
         }
+    }
 
+    getList() {
+        var that = this;
+        getCoursesList().then(r => {
+            that.setState({
+                course: r
+            })
+        })
     }
 
     handleReturnToHome() {
@@ -17,19 +25,13 @@ class CourseList extends Component {
     }
 
     render(){
-        const course = getCoursesList()
+        this.getList()
         return (
             <div className="base-container">
                 <div className="header">Lista de cursos creados</div>
                 <div className="content">
-                    
                         <div className="course">
-                            <div className="course-field">Id: {course.id}</div>
-                            <div className="course-field">Nombre: {course.name}</div>
-                            <div className="course-field">Profesor: {course.prof}</div>
-                            <div className="course-field">Créditos: {course.credits}</div>
-                            <div className="course-field">Correlativas: {course.correlatives}</div>
-                            <div className="course-field">Activo: {course.active}</div>
+                            <div className="course-field">Id: {this.state.course}</div>
                         </div>
                 </div>
                 <button name="return-to-home" className="button-home" onClick={this.handleReturnToHome}>Volver a la página principal</button>

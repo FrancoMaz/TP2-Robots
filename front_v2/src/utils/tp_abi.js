@@ -1,4 +1,4 @@
-var tpAbi = [
+const tpAbi = [
 	{
 		"anonymous": false,
 		"inputs": [
@@ -42,6 +42,21 @@ var tpAbi = [
 		],
 		"name": "StudentApproved",
 		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "addId",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
 	},
 	{
 		"constant": false,
@@ -148,6 +163,27 @@ var tpAbi = [
 			{
 				"internalType": "uint256",
 				"name": "approvalDate",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "courseTests",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
 				"type": "uint256"
 			}
 		],
@@ -353,6 +389,27 @@ var tpAbi = [
 		],
 		"payable": false,
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getCourseId",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -566,5 +623,6 @@ var tpAbi = [
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-]
+];
+
 export default tpAbi

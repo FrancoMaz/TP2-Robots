@@ -1,7 +1,7 @@
 import Web3 from 'web3';
 import tpAbi from './tp_abi';
- 
-var cryptoTpAddress = '0xa32c98518E31Da77FbFd5a3fA1A380Dd6d1aA16d';
+
+const cryptoTpAddress = '0xb2a506DFBD6b0F517f776220d4E81E6c78eFBd43';
 
 async function loadWeb3() {
   if (window.ethereum) {
@@ -18,14 +18,14 @@ async function load() {
 }
 
 async function loadContract() {
-  return await new window.web3.eth.Contract(tpAbi, cryptoTpAddress);
+  return new window.web3.eth.Contract(tpAbi, cryptoTpAddress);
 }
-      
+
 
 function loadTp () {
   console.log("loading...");
-  load();
+  load().then(r => console.log("Ready"));
   console.log('load');
-} 
+}
 export default loadTp
- 
+
