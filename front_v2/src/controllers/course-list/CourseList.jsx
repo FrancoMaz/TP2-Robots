@@ -7,7 +7,7 @@ class CourseList extends Component {
         super(props)
         this.handleReturnToHome = this.handleReturnToHome.bind(this)
         this.state = {
-            course: null
+            courses: null
         }
     }
 
@@ -15,7 +15,7 @@ class CourseList extends Component {
         var that = this;
         getCoursesList().then(r => {
             that.setState({
-                course: r
+                courses: r
             })
         })
     }
@@ -26,18 +26,19 @@ class CourseList extends Component {
 
     render(){
         this.getList()
-        return this.state.course ? (
+        return this.state.courses ? (
             <div className="base-container">
                 <div className="header">Lista de cursos creados</div>
                 <div className="content">
+                    {this.state.courses.map(course =>
                         <div className="course">
-                            <div className="course-field">Id: {this.state.course[0].id}</div>
-                            <div className="course-field">Nombre: {this.state.course[0].name}</div>
-                            <div className="course-field">Profesor: {this.state.course[0].prof}</div>
-                            <div className="course-field">Créditos: {this.state.course[0].credits}</div>
-                            <div className="course-field">Correlativas: {this.state.course[0].correlatives}</div>
-                            <div className="course-field">Activo: {this.state.course[0].active}</div>
-                        </div>
+                            <div className="course-field">Id: {course.id}</div>
+                            <div className="course-field">Nombre: {course.name}</div>
+                            <div className="course-field">Profesor: {course.prof}</div>
+                            <div className="course-field">Créditos: {course.credits}</div>
+                            <div className="course-field">Correlativas: {course.correlatives.join(', ')}</div>
+                            <div className="course-field">Activo: {course.active ? "Sí" : "No"}</div>
+                        </div>)}
                 </div>
                 <button name="return-to-home" className="button-home" onClick={this.handleReturnToHome}>Volver a la página principal</button>
             </div>
