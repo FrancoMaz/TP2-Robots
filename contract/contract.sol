@@ -23,10 +23,6 @@ contract Class is Ownable, Credits {
         bool active;
     }
     
-    struct CourseTest {
-        uint id;
-    }
-    
     struct Approval {
         uint courseId;
         address student;
@@ -40,10 +36,9 @@ contract Class is Ownable, Credits {
     mapping (address => mapping (uint => Approval)) public studentAddressToApprovals;
     mapping (uint => mapping (address => Approval)) public courseIdToApprovals;
     
-    Course[] public courses;
-    CourseTest[] public courseTests;
-    
-    function _existsCourse(uint _id) private returns (bool) {
+    Course[] courses;
+
+    function _existsCourse(uint _id) private view returns (bool) {
         for (uint i = 0; i < courses.length; i++) {
             if (courses[i].id == _id) {
                 return true;
@@ -52,16 +47,10 @@ contract Class is Ownable, Credits {
         return false;
     }
     
-    function getCourseId(uint _id) public returns (uint) {
-        if (courseTests.length > 0) {
-            return courseTests[0].id;
-        }
-        return 0;
+    function getCourses() public view returns (Course[] memory) {
+        return courses;
     }
     
-    function addId(uint _id) public payable {
-        courseTests.push(CourseTest(_id));
-    }
 
     function createOrEditCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) public payable {
         if (_existsCourse(_id)) {

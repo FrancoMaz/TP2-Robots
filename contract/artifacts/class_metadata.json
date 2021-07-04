@@ -53,21 +53,6 @@
 				"constant": false,
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					}
-				],
-				"name": "addId",
-				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "_student",
 						"type": "address"
@@ -185,74 +170,12 @@
 						"type": "uint256"
 					}
 				],
-				"name": "courseTests",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
 				"name": "courseToOwner",
 				"outputs": [
 					{
 						"internalType": "address",
 						"name": "",
 						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "courses",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"internalType": "address",
-						"name": "prof",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "credits",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "active",
-						"type": "bool"
 					}
 				],
 				"payable": false,
@@ -398,24 +321,50 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					}
-				],
-				"name": "getCourseId",
+				"constant": true,
+				"inputs": [],
+				"name": "getCourses",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "prof",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "credits",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "correlatives",
+								"type": "uint256[]"
+							},
+							{
+								"internalType": "bool",
+								"name": "active",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct Class.Course[]",
 						"name": "",
-						"type": "uint256"
+						"type": "tuple[]"
 					}
 				],
 				"payable": false,
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -651,10 +600,10 @@
 	},
 	"sources": {
 		"contract.sol": {
-			"keccak256": "0xfdb8a9b3136cda430e8f3ba99e3a884da5ebb436b6d5f3523c72ca40ffbd76c6",
+			"keccak256": "0x04f58d35a2ee3d486c3aa8a091f43e6b567c13ad5f12bd926e92e0ec83db6f56",
 			"urls": [
-				"bzz-raw://91c74c39cbb140bae25be386887ac1a3858e93afb699d2a1052e092b9a7043b0",
-				"dweb:/ipfs/QmaBSFu4RE7j8QozuKgv39UMspJBwkeTxQTa8goWT4U59P"
+				"bzz-raw://66ec5bf93a3cf4397856b1b36e0518a7883406efbbadd41f0d838b73b0278140",
+				"dweb:/ipfs/QmPKKyqMsrbhcNjheR4qmH8t55bJndWKY3PKjyRH9c5M75"
 			]
 		},
 		"credits.sol": {

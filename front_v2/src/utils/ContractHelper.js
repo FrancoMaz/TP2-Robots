@@ -4,12 +4,18 @@ async function getCurrentAccount() {
 }
 
 export async function getCoursesList() {
-    return await window.contract.methods.getCourseId(0).call();
+    return await window.contract.methods.getCourses().call();
 }
 
 export async function createOrEditCourse(params) {
     const account = await getCurrentAccount();
-    window.contract.methods.addId(parseInt(params.id)).send({from: account})
+    window.contract.methods.createOrEditCourse(
+        parseInt(params.id),
+        params.name,
+        params.prof,
+        parseInt(params.credits),
+        params.correlatives,
+        params.active === "true").send({from: account})
 }
 
 export function approveStudent(student, courseId, partialApproval, rate) {
