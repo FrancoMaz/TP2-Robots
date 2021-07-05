@@ -22,7 +22,11 @@ class ApproveStudent extends Component {
   }
 
   handleSubmit() {
-    approveStudent(this.state.studentAddress, this.state.courseId, this.state.partialApproval, this.state.rate)
+    approveStudent(
+        this.state.studentAddress,
+        this.state.courseId,
+        this.state.partialApproval,
+        this.state.rate).then(r => console.log(r))
   }
 
   handleReturnToHome() {

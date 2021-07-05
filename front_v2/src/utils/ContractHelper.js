@@ -18,14 +18,15 @@ export async function createOrEditCourse(params) {
         params.active === "true").send({from: account})
 }
 
-export function approveStudent(student, courseId, partialApproval, rate) {
+export async function approveStudent(student, courseId, partialApproval, rate) {
+    const account = await getCurrentAccount();
     if (partialApproval) {
-        window.contract.methods.approveStudentPartial(student, courseId).send()
+        window.contract.methods.approveStudentPartial(student, courseId).send({from: account})
     } else {
-        window.contract.methods.approveStudentTotal(student, courseId, rate).send()
+        window.contract.methods.approveStudentTotal(student, courseId, rate).send({from: account})
     }
 }
 
-export function checkStudentState(student) {
-    return window.contract.methods.getApprovalsByStudent(student).call()
+export async function checkStudentState(student) {
+    return await window.contract.methods.getApprovalsByStudent(student).call()
 }

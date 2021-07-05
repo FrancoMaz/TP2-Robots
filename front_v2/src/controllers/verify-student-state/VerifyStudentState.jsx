@@ -7,6 +7,11 @@ class VerifyStudentState extends Component {
     constructor(props){
         super(props)
         this.handleReturnToHome = this.handleReturnToHome.bind(this)
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            approvals: null
+        }
 
     }
 
@@ -20,13 +25,22 @@ class VerifyStudentState extends Component {
     }
 
     handleSubmit() {
+        this.getList()
         this.state = {
-            studentApprovals: checkStudentState(this.state.studentAddress)
+            approvals: checkStudentState(this.state.studentAddress)
         }
     }
 
-    render(){
+    getList() {
+        var that = this;
+        checkStudentState(this.state.studentAddress).then(r => {
+            that.setState({
+                approvals: r
+            })
+        })
+    }
 
+    render(){
         return (
             <div className="base-container">
                 <div className="header">Verificar estado de alumno</div>
@@ -36,15 +50,16 @@ class VerifyStudentState extends Component {
                     </div>
                     <button className="button" onClick={this.handleSubmit}>Verificar estado del alumno</button>
                 </div>
-                <div className="content">
-                    {this.state.approvals.map(approval =>
-                    <div className="approval">
-                        <div className="approval-field">Curso: {approval.courseId}</div>
-                        <div className="approval-field">Estado: {approval.partialApproval ? "Solo cursada" : "Aprobado"}</div>
-                        <div className="course-field">Nota: {approval.rate}</div>
-                        <div className="course-field">Fecha de aprobación: {approval.approvalDate}</div>
-                    </div>)}
-                </div>
+                {this.state.approvals ?
+                    <div className="content">
+                        {this.state.approvals.map(approval =>
+                            <div className="approval">
+                                <div className="approval-field">Curso: {approval.courseId}</div>
+                                <div className="approval-field">Estado: {approval.partialApproval ? "Solo cursada" : "Aprobado"}</div>
+                                <div className="course-field">{approval.rate > 0 ? "Nota: " + approval.rate : ""}</div>
+                                <div className="course-field">Fecha de aprobación: {approval.approvalDate}</div>
+                            </div>)}
+                    </div> : null}
                 <button name="return-to-home" className="button-home" onClick={this.handleReturnToHome}>Volver a la página principal</button>
             </div>
 

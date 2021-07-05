@@ -36,7 +36,7 @@ class CourseList extends Component {
                             <div className="course-field">Nombre: {course.name}</div>
                             <div className="course-field">Profesor: {course.prof}</div>
                             <div className="course-field">Créditos: {course.credits}</div>
-                            <div className="course-field">Correlativas: {course.correlatives.join(', ')}</div>
+                            <div className="course-field">{course.correlatives.length > 0 ? "Correlativas: " + course.correlatives.join(', ') : ""}</div>
                             <div className="course-field">Activo: {course.active ? "Sí" : "No"}</div>
                         </div>)}
                 </div>
