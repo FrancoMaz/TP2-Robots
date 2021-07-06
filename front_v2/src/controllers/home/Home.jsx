@@ -32,10 +32,10 @@ export class Home extends Component {
           <div className="container-home">
             <div className="base-container">
                 <div className="admin-options">
-                    <button name="list-courses" className="button-home" onClick={this.handleListCourses}>Listar cursos</button>
-                    <button name="create-course" className="button-home" onClick={this.handleCreateCourse}>Crear/Modificar curso</button>
-                    <button name="approve-student" className="button-home" onClick={this.handleApproveStudent}>Aprobar alumno</button>
-                    <button name="verify-student-state" className="button-home" onClick={this.handleVerifyStudentState}>Verificar estado alumno</button>
+                    <button name="list-courses" className="button-home button-home-intro" onClick={this.handleListCourses}>Listar cursos</button>
+                    <button name="create-course" className="button-home button-home-intro" onClick={this.handleCreateCourse}>Crear/Modificar curso</button>
+                    <button name="approve-student" className="button-home button-home-intro" onClick={this.handleApproveStudent}>Aprobar alumno</button>
+                    <button name="verify-student-state" className="button-home button-home-intro" onClick={this.handleVerifyStudentState}>Verificar estado alumno</button>
                 </div>
             </div>
           </div>
