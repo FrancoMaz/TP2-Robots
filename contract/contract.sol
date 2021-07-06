@@ -33,11 +33,11 @@ contract Class is Ownable, Credits {
     mapping (address => mapping (uint => Approval)) public studentAddressToApprovals;
     mapping (uint => mapping (address => Approval)) public courseIdToApprovals;
 
-    Course[] courses;
+    uint[] courseIds;
 
     function _existsCourse(uint _id) private view returns (bool) {
-        for (uint i = 0; i < courses.length; i++) {
-            if (courses[i].id == _id) {
+        for (uint i = 0; i < courseIds.length; i++) {
+            if (courseIds[i] == _id) {
                 return true;
             }
         }
@@ -45,9 +45,13 @@ contract Class is Ownable, Credits {
     }
 
     function getCourses() public view returns (Course[] memory) {
-        return courses;
+        Course[] memory coursesArray = new Course[](courseIds.length);
+        for (uint i = 0; i < courseIds.length; i++) {
+            coursesArray[i] = idToCourse[courseIds[i]];
+        }
+        return coursesArray;
     }
-
+    
 
     function createOrEditCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) public payable {
         if (_existsCourse(_id)) {
@@ -58,13 +62,13 @@ contract Class is Ownable, Credits {
     }
 
     function createCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) private {
-        Course memory course = Course(_id, _name, _prof, _credits, _correlatives, _active);
-        idToCourse[_id] = course;
+        idToCourse[_id] = Course(_id, _name, _prof, _credits, _correlatives, _active);
         courseToOwner[_id] = msg.sender;
-        courses.push(course);
+        courseIds.push(_id);
     }
 
     function editCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) private {
+        require(msg.sender == courseToOwner[_id]);
         Course storage courseToChange = idToCourse[_id];
         courseToChange.name = _name;
         courseToChange.prof = _prof;
@@ -109,12 +113,11 @@ contract Class is Ownable, Credits {
     }
 
     function getApprovalsByStudent(address _student) public view returns (Approval[] memory) {
-        Approval[] memory result = new Approval[](courses.length);
+        Approval[] memory result = new Approval[](courseIds.length);
         uint counter = 0;
-        for (uint i = 0; i < courses.length; i++) {
-            uint courseId = courses[i].id;
-          if (studentAddressToApprovals[_student][courseId].student == _student) {
-            result[counter] = studentAddressToApprovals[_student][courseId];
+        for (uint i = 0; i < courseIds.length; i++) {
+          if (studentAddressToApprovals[_student][courseIds[i]].student == _student) {
+            result[counter] = studentAddressToApprovals[_student][courseIds[i]];
             counter++;
           }
         }

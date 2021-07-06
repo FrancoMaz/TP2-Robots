@@ -10,12 +10,12 @@ export async function getCoursesList() {
 export async function createOrEditCourse(params) {
     const account = await getCurrentAccount();
     window.contract.methods.createOrEditCourse(
-        parseInt(params.id),
+        params.id,
         params.name,
         params.prof,
-        parseInt(params.credits),
+        params.credits,
         params.correlatives,
-        params.active === "true").send({from: account})
+        params.active).send({from: account})
 }
 
 export async function approveStudent(student, courseId, partialApproval, rate) {
