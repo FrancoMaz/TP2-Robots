@@ -26,7 +26,7 @@ class CreateCourse extends Component {
     super(props)
     this.state = {
       errors:{},
-      active:'true',
+      active:true,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -57,7 +57,7 @@ class CreateCourse extends Component {
         credits: this.state.credits,
         correlatives: correlatives.split(',').map(c => parseInt(c)),
         active: this.state.active
-      }).then(r => console.log(r));
+      }).then(r => console.log('response create course',r));
   }
 
   handleReturnToHome() {
@@ -96,14 +96,15 @@ class CreateCourse extends Component {
                 </label>
                 <FormControl className={classes.formControl}>
                   <Select
+                    name="active"
                     labelId="demo-customized-select-label"
                     id="demo-customized-select"
         
                     value={this.state.active}
-                    onChange={this.handleChange}
+                    onChange={this.handleInputChange}
                   >
-                    <MenuItem value={'true'}>Si</MenuItem>
-                    <MenuItem value={'false'}>No</MenuItem>
+                    <MenuItem value={true}>Si</MenuItem>
+                    <MenuItem value={false}>No</MenuItem>
                   </Select>
                 </FormControl>
               </div>

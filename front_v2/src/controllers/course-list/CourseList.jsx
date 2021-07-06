@@ -1,5 +1,36 @@
 import React, { Component } from 'react';
 import {getCoursesList} from "../../utils/ContractHelper";
+import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import Container from '@material-ui/core/Container';
+import TableBody from '@material-ui/core/TableBody'
+import createHistory from 'history/createBrowserHistory'
+
+import "./course-list.scss"
+
+
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }))(TableRow);
 
 class CourseList extends Component {
 
@@ -28,26 +59,42 @@ class CourseList extends Component {
     }
 
     render(){
-        return(
-            <div className="base-container">
-                <div className="header">Lista de cursos creados</div>
-                <div className="content">
-                    {this.state.courses && this.state.courses.lenght !== 0 ? (
-                    <div>
-                        {this.state.courses.map(course =>
-                            <div className="course">
-                                <div className="course-field">Id: {course.id}</div>
-                                <div className="course-field">Nombre: {course.name}</div>
-                                <div className="course-field">Profesor: {course.prof}</div>
-                                <div className="course-field">Créditos: {course.credits}</div>
-                                <div className="course-field">{course.correlatives.length > 0 ? "Correlativas: " + course.correlatives.join(', ') : ""}</div>
-                                <div className="course-field">Activo: {course.active ? "Sí" : "No"}</div>
-                            </div>)}
-                    </div>) : <div>No hay cursos</div>}
-                    <button name="return-to-home" className="button-home" onClick={this.handleReturnToHome}>Volver a la página principal</button>
-                </div>
+        const courses = this.state.courses
+        return (
+          <div>
+            <div className="course-list">
+              <Container maxWidth="lg">
+              {courses && courses.lenght !== 0 ? (
+                <TableContainer component={Paper}>
+                  <Table className="table" aria-label="customized table">
+                    <TableHead>
+                      <TableRow>
+                        <StyledTableCell>Id</StyledTableCell>
+                        <StyledTableCell align="center">Nombre</StyledTableCell>
+                        <StyledTableCell align="center">Profesor address&nbsp;</StyledTableCell>
+                        <StyledTableCell align="center">Créditos</StyledTableCell>
+                        <StyledTableCell align="center">Correlativas</StyledTableCell>
+                        <StyledTableCell align="center">Activo</StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {courses.map(course => (
+                        <StyledTableRow key={course.id}>
+                          <StyledTableCell component="th" scope="row">{course.id}</StyledTableCell>
+                          <StyledTableCell align="center">{course.name}</StyledTableCell>
+                          <StyledTableCell align="center">{course.prof}</StyledTableCell>
+                          <StyledTableCell align="center">{course.credits}</StyledTableCell>
+                          <StyledTableCell align="center">{course.correlatives.length > 0 ? course.correlatives.join(', ') : ""}</StyledTableCell>
+                          <StyledTableCell align="center">{course.active ? "Sí" : "No"}</StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>) : <div>No hay cursos</div>}
+              </Container>
             </div>
-        )
+          </div>
+        );
     }
 }
 

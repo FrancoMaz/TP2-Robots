@@ -15,7 +15,7 @@ export async function createOrEditCourse(params) {
         params.prof,
         parseInt(params.credits),
         params.correlatives,
-        params.active === "true").send({from: account})
+        params.active).send({from: account})
 }
 
 export async function approveStudent(student, courseId, partialApproval, rate) {
