@@ -58,7 +58,6 @@ contract Class is Ownable, Credits {
     }
 
     function createCourse(uint _id, string memory _name, address _prof, uint _credits, uint[] memory _correlatives, bool _active) private {
-        require(msg.sender == courseToOwner[_id]);
         Course memory course = Course(_id, _name, _prof, _credits, _correlatives, _active);
         idToCourse[_id] = course;
         courseToOwner[_id] = msg.sender;
