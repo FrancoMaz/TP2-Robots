@@ -96,12 +96,13 @@ class VerifyStudentState extends Component {
                                 </TableHead>
                                 <TableBody>
                                   {approvals.map(approval => (
+                                    approval.courseId !== '0' ?
                                     <StyledTableRow key={approval.courseId}>
                                       <StyledTableCell component="th" scope="row">{approval.courseId}</StyledTableCell>
                                       <StyledTableCell align="center">{approval.partialApproval? "solo cursada" : "aprobado"}</StyledTableCell>
                                       <StyledTableCell align="center">{approval.rate > 0 ? approval.rate : "-"}</StyledTableCell>
                                       <StyledTableCell align="center">{Moment(Number(approval.approvalDate)*1000,).format("DD MMM YYYY")}</StyledTableCell>
-                                    </StyledTableRow>
+                                    </StyledTableRow> : null 
                                   ))}
                                 </TableBody>
                               </Table>
