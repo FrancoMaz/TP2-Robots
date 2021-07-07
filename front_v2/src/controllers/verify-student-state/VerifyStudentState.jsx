@@ -10,6 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import Container from '@material-ui/core/Container';
 import TableBody from '@material-ui/core/TableBody'
+import Moment from 'moment';
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -61,6 +62,7 @@ class VerifyStudentState extends Component {
     getList() {
         var that = this;
         checkStudentState(this.state.studentAddress).then(r => {
+          console.log('verifyStudentState: ', r)
             that.setState({
                 approvals: r
             })
@@ -96,9 +98,9 @@ class VerifyStudentState extends Component {
                                   {approvals.map(approval => (
                                     <StyledTableRow key={approval.courseId}>
                                       <StyledTableCell component="th" scope="row">{approval.courseId}</StyledTableCell>
-                                      <StyledTableCell align="center">{approval.partialApproval}</StyledTableCell>
-                                      <StyledTableCell align="center">{approval.rate > 0 ? approval.rate : ""}</StyledTableCell>
-                                      <StyledTableCell align="center">{approval.approvalDate}</StyledTableCell>
+                                      <StyledTableCell align="center">{approval.partialApproval? "solo cursada" : "aprobado"}</StyledTableCell>
+                                      <StyledTableCell align="center">{approval.rate > 0 ? approval.rate : "-"}</StyledTableCell>
+                                      <StyledTableCell align="center">{Moment(Number(approval.approvalDate)*1000,).format("DD MMM YYYY")}</StyledTableCell>
                                     </StyledTableRow>
                                   ))}
                                 </TableBody>

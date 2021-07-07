@@ -32,6 +32,7 @@ class CreateCourse extends Component {
     this.handleReturnToHome = this.handleReturnToHome.bind(this);
     this.handleAlertStatus = this.handleAlertStatus.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.buildCorrelatives = this.buildCorrelatives.bind(this);
   }
 
   handleChange = (event) => {
@@ -53,9 +54,17 @@ class CreateCourse extends Component {
         name: this.state.name,
         prof: this.state.prof,
         credits: this.state.credits,
-        correlatives: correlatives.split(',').map(c => parseInt(c)),
+        correlatives:this.buildCorrelatives(correlatives),
         active: this.state.active
       }).then(r => console.log('response create course',r));
+  }
+
+  buildCorrelatives(correlatives) {
+    if (correlatives === ''){
+      return []
+    } 
+    return correlatives.split(',').map(c => parseInt(c))
+    
   }
 
   handleReturnToHome() {
