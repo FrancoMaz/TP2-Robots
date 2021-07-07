@@ -5,9 +5,7 @@ import {createOrEditCourse} from "../../utils/ContractHelper";
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
 
 const classes = makeStyles((theme) => ({
   button: {
@@ -69,7 +67,6 @@ class CreateCourse extends Component {
   }
 
   render(){
-
     return (
       <div className="base-container">
           <div className="header">Crear/Modificar curso</div>
@@ -99,10 +96,8 @@ class CreateCourse extends Component {
                     name="active"
                     labelId="demo-customized-select-label"
                     id="demo-customized-select"
-        
                     value={this.state.active}
-                    onChange={this.handleInputChange}
-                  >
+                    onChange={this.handleInputChange}>
                     <MenuItem value={true}>Si</MenuItem>
                     <MenuItem value={false}>No</MenuItem>
                   </Select>
@@ -112,9 +107,7 @@ class CreateCourse extends Component {
             </div>
             <button name="return-to-home" className="button" onClick={this.handleReturnToHome}>Volver a la página principal</button>
           </div>
-          
       </div>
-
   );
   }
 }

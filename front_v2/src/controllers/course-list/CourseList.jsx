@@ -9,8 +9,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import Container from '@material-ui/core/Container';
 import TableBody from '@material-ui/core/TableBody'
-import createHistory from 'history/createBrowserHistory'
-
 import "./course-list.scss"
 
 
@@ -31,6 +29,7 @@ const StyledTableRow = withStyles((theme) => ({
       },
     },
   }))(TableRow);
+
 
 class CourseList extends Component {
 
@@ -64,7 +63,7 @@ class CourseList extends Component {
           <div>
             <div className="course-list">
               <Container maxWidth="lg">
-              {courses && courses.lenght !== 0 ? (
+              {courses && courses.length !== 0 ? (
                 <TableContainer component={Paper}>
                   <Table className="table" aria-label="customized table">
                     <TableHead>
@@ -90,7 +89,8 @@ class CourseList extends Component {
                       ))}
                     </TableBody>
                   </Table>
-                </TableContainer>) : <div>No hay cursos</div>}
+                </TableContainer>) : <h1 className="non-courses">No hay cursos</h1>}
+                <button name="return-to-home" className="button" onClick={this.handleReturnToHome}>Volver a la página principal</button>
               </Container>
             </div>
           </div>

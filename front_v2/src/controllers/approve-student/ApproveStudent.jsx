@@ -46,16 +46,19 @@ class ApproveStudent extends Component {
                 <div className="form-group">
                   <TextField type="text" name="studentAddress" id="student-address" label="Address del alumno" variant="outlined" onChange={this.handleInputChange} />
                 </div>
-                <div className="form-group">
-                  <Select
-                      name="partialApproval"
-                      labelId="approval-type"
-                      id="approval-type"
-                      onChange={this.handleInputChange}>
-                    <MenuItem value={true}>Solo cursada</MenuItem>
-                    <MenuItem value={false}>Aprobado</MenuItem>
-                  </Select>
-                </div>
+                  <div className="form-group">
+                  <label>
+                    Estado de aprobación
+                  </label>
+                    <Select
+                        name="partialApproval"
+                        labelId="approval-type"
+                        id="approval-type"
+                        onChange={this.handleInputChange}>
+                      <MenuItem value={true}>Solo cursada</MenuItem>
+                      <MenuItem value={false}>Aprobado</MenuItem>
+                    </Select>
+                  </div>
                 <div className="form-group">
                   <TextField type="text" pattern="[0-9]+" name="rate" id="rate" label="Nota" variant="outlined" onChange={this.handleInputChange} />
                 </div>

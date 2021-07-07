@@ -1,7 +1,7 @@
 import Web3 from 'web3';
 import tpAbi from './tp_abi';
 
-const cryptoTpAddress = '0x8308371850DD7F1adb0EE66e1B892b3C0B524893';
+const cryptoTpAddress = '0x6fDfaECD9461a026052592D1D73814f0Bbee43Da';
 
 async function loadWeb3() {
   if (window.ethereum) {
